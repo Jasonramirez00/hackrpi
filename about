@@ -47,19 +47,19 @@ article {
    <h1>About</h1>
 </header>
 
-<p>Welcome to the Games Site! Here, there are a variety of games for you to play, explore, and most importantly, have fun. Down below are some descriptions for each game.
+<p>Welcome to the Winaprize Hackathon Games! Here, there are a variety of games for you to play, explore, and most importantly, have fun. Down below include descriptions for each game. Now, let's play games, earn points, get prizes.
 </p>
 
 <article>
   <h1>Game 1</h1>
-  <p>Description 1</p>
-  <p>Description 2</p>
+  <p>A blue block travels until it hits a barrier or a red block.</p>
+  
 </article>
 
 <article>
   <h1>Game 2</h1>
   <p>Description 1</p>
-  <p>Description 2</p>
+  
 </article>
 
 <article>
@@ -74,5 +74,4 @@ article {
 
 </body>
 </html>
-
 
