@@ -5,7 +5,7 @@
     <title>GAMES FOR PRIZES FREE MONEY</title>
     <style>
     	* { padding: 0; margin: 0; }
-    	canvas { background: #eee; display: block; margin: 0 auto; }
+    	canvas { background: #fff; display: block; margin: 0 auto; }
     </style>
 </head>
 <body>
@@ -19,8 +19,8 @@
 	
 	var playerHeight = 30;
 	var playerWidth = 30;
-	var playerX = 0;
-    var playerY = 0;
+	var playerX = 10;
+    var playerY = 10;
 	var moveSpeed = 4;
 	
 	// User Input
@@ -29,38 +29,40 @@
     var upPressed = false;
     var downPressed = false;
     var moveAllow = [true, true, true, true];
+    
+    var level = 0;
 
 	
 	function drawPlayer() {
 	    ctx.beginPath();
-	    ctx.rect(playerX, playerY, playerWidth, playerHeight);
-	    ctx.fillStyle = "#0095DD";
-	    ctx.fill();
+        ctx.fillStyle = "#0095DD";
+	    ctx.fillRect(playerX, playerY, playerWidth, playerHeight);
 	    ctx.closePath();
 	}
     
     var killWall = function(x,y,w,h){
-    fill(255, 50, 50);
-    rect(x,y,w,h);
-    var rightEdge = charPos[0]+charSize*2;
-    var leftEdge = charPos[0];
-    var topEdge = charPos[1];
-    var bottomEdge = charPos[1]+charSize*2;
-    
-    
-    if (rightEdge>x&&leftEdge<x+w&&topEdge<y+h&&bottomEdge>y){
-        if (level === 2){
-            charPos = [30, 105];
-        } else {
-            charPos = [25, 25];
+        ctx.fillStyle = "#ff0000";
+        ctx.fillRect(x,y,w,h);
+        var rightEdge = playerX + playerWidth;
+        var leftEdge = playerX;
+        var topEdge = playerY;
+        var bottomEdge = playerY + playerHeight;
+        
+        if (rightEdge > x && leftEdge < x + w && topEdge < y + h && bottomEdge > y){
+            //if (level === 2){
+            //    charPos = [30, 105];
+            //} else {
+            //    playerX = 0;
+            //    playerY = 0;
+            //}
+            playerX = 10;
+            playerY = 10;
         }
-    }
     } 
     
     var wall = function(x,y,w,h){
-        ctx.fillStyle = (50, 50, 255);
-        ctx.rect(x,y,w,h);
-        ctx.fill();
+        ctx.fillStyle = "#0095DD";
+        ctx.fillRect(x,y,w,h);
         var rightEdge = playerX + playerWidth;
         var leftEdge = playerX;
         var topEdge = playerY;
@@ -82,27 +84,25 @@
     }
     
     var goal = function(x,y,w,h){
-    fill(0, 255, 0);
-    rect(x,y,w,h);
-    var rightEdge = charPos[0]+charSize*2;
-    var leftEdge = charPos[0];
-    var topEdge = charPos[1];
-    var bottomEdge = charPos[1]+charSize*2;
-    if (rightEdge>x&&leftEdge<x+w&&topEdge<y+h&&bottomEdge>y){
-        if (level === 'menu'){
-            level = 0;
-        } else {
-            level += 1;
-        }
-        if (level === 2){
-            charPos = [30, 105];
-        } else {
-            charPos = [25, 25];
+        ctx.fillStyle = "#00ff00";
+        ctx.fillRect(x,y,w,h);
+        var rightEdge = playerX + playerWidth;
+        var leftEdge = playerX;
+        var topEdge = playerY;
+        var bottomEdge = playerY + playerHeight;
+        if (rightEdge > x && leftEdge < x + w && topEdge < y + h && bottomEdge > y){
+            if (level === 'menu'){
+                level = 0;
+            } else {
+                level += 1;
+            }
+            if (level === 2){
+                charPos = [30, 105];
+            } else {
+                charPos = [25, 25];
+            }
         }
     }
-    }
-    
-
 	
 	function collisionDetection() {
 	    for(c=0; c < brickColumnCount; c++) {
@@ -122,14 +122,22 @@
 	    ctx.clearRect(0, 0, canvas.width, canvas.height);
 		drawPlayer();
         moveAllow = [true, true, true, true];
-        wall(265, 125, 24, 150);
-        //wall(25, 225, 125, 24);
-        //wall(150, 99, 24, 225);
-        //killWall(sin(millis()/12)*87+263, 100, 25, 50);
-        //killWall(sin(millis()/12+175)*87+263, 156, 25, 50);
-        //killWall(sin(millis()/12)*87+263, 213, 25, 50);
-        //killWall(sin(millis()/12+175)*87+263, 274, 25, 50);
-        //goal(100, 250, 50, 50);
+        if (level == 0) {
+            //wall(150, 99, 24, 225);
+            killWall(75, 150, 25, 300);
+            killWall(200, 0, 25, 300);
+            killWall(300, 150, 25, 300);
+            killWall(400, 0, 25, 300);
+            killWall(525, 150, 25, 300);
+            goal(canvas.width - 50, 0, 50, 50);
+            
+            // Border
+            wall(0, 0, 5, canvas.height);
+            wall(0, 0, canvas.width, 5);
+            wall(canvas.width - 5, 0, 5, canvas.height);
+            wall(0, canvas.height - 5, canvas.width, 5);
+        }
+
         
 		if(upPressed && playerY > 0 && moveAllow[0]) {
 		    playerY -= moveSpeed;
