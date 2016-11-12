@@ -1,18 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>GAMES FOR PRIZES FREE MONEY</title>
-    <style>
-    	* { padding: 0; margin: 0; }
-    	canvas { background: #fff; display: block; margin: 0 auto; }
-    </style>
-</head>
-<body>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Play4Prizes</title>
 
-<canvas id="myCanvas" width="640" height="380" style="margin-top: 60px;"></canvas>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css.css">
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    </head>
+    <body>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Play4Prizes</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#home">Home</a></li>
+            <li><a href="#game">Games</a></li>
+            <li><a href="#prize">Prizes</a></li> 
+            <li><a href="#about">About</a></li> 
+          </ul>
+        </div>
+      </nav>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-10">
+  			<div class=game>
+  				<canvas id="myCanvas" width="640" height="380" style="margin-top: 60px;"></canvas>
+  			</div>
+          </div>
+          <div class="col-sm-2">
+            <img src="http://placehold.it/180x500">
+            </div>
+          </div>
+        </div>
+        <footer class="footer">
+          <div class="container">
+            <p class="text-muted">Footer will go here...</p>
+          </div>
+        </footer>
 
-<script>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+        <script>
 	var canvas = document.getElementById("myCanvas");
 	var ctx = canvas.getContext("2d");
 	var ballRadius = 10;
@@ -197,6 +238,5 @@
     draw();
     
 </script>
-
-</body>
+      </body>
 </html>
