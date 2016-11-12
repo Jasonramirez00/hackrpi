@@ -25,5 +25,21 @@ margin: 20px 750px 20px 0;
 a,p {
 
 background-color: rgba(100,80,60,50);
+}
 
+.caption {
+  background-color: rgba(0, 0, 0, 0.7);
+  color: rgba(255, 255, 255, 0.9);
+  display: inline;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 10px;
+ left: 950px;
+ bottom: 375px;
+  padding: 10px;
+  padding-right: 50px; 
+  position: relative ;
+  top: 80%;
+  width: 60%;
 }
