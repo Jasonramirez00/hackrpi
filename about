@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 <style>
@@ -40,20 +41,12 @@ nav ul a {
    <h1>About</h1>
 </header>
 
-<p>Welcome to the Winaprize Hackathon Games! Here, there are a variety of games for you to play, explore, and most importantly, have fun. Down below include descriptions for each game. Now, let's play games, earn points, get prizes.
+<p>Welcome to the Play4Prizes! Here, there are a variety of games for you to play, explore, and most importantly, have fun. Down below include descriptions for each game. Now, let's play games, earn points, get prizes.
 </p>
 
-<h1>Game 1</h1>
-<p>In this game, a blue block travels until it hits a barrier or a red block. Goal is to try to avoid crashing and keep alive as long as possible to gain points.</p>
-  
+<h1>Block Maze</h1>
+<p>In this game, a blue block travels through a maze. The goal of the game is to try to avoid crashing and to remain alive for as long as possible to gain points and advance to the next level.</p>
 
-<h1>Game 2</h1>
-<p>Description 1</p>
-  
-<h1>Game 3</h1>
-<p>Description 1</p>
-<p>Description 2</p>
-</article>
 
 <footer>Games rock</footer>
 
@@ -61,6 +54,8 @@ nav ul a {
 
 </body>
 </html>
+
+
 
 
 
