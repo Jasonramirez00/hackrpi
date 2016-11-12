@@ -1,0 +1,113 @@
+<html>
+<head>
+	<style>
+		div.banner img{
+			width: 75%;
+			margin: 0 10% 0 14%;
+			height: auto;
+		}
+		div.imgrp {
+			width: 75%;
+			margin: 0 10% 0 14%;
+		}
+		div.img {
+			margin: 5px;
+			border: 1px solid #ccc;
+			width: 200px;
+			display: inline-block;
+		}
+		div.img img {
+			width: 100%;
+			height: auto;
+		}
+		div.desc {
+			padding: 10px;
+			text-align: center;
+		}
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		div.nav {
+			list-style-type: none;
+			overflow: hidden;
+			background-color: #333;
+			width: 74.3%;
+			margin: 0 10% 0 14%;
+		}
+		li {
+			float: left;
+			list-style-type: none;
+		}
+		li a {
+			display: block;
+			color: white;
+			text-align: center;
+			padding: 14px 16px;
+			text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="banner"><img src="people.jpg" alt="banner image"></div>
+	<div class=nav>
+		<ul>
+			<li><a href="#home">Home</a></li>
+			<li><a href="#game">Games</a></li>
+			<li><a href="#prize">Prizes</a></li>
+			<li><a href="#about">About</a></li>
+		</ul>
+	</div>
+	<div class="imgrp">
+		<div class="img">
+			<a href="https://www.google.com/">
+				<img src="img.jpg" alt="Sample Image" width="300" height="200">
+			</a>
+			<div class="desc">
+				You can win this. Play now!
+			</div>
+		</div>
+		<div class="img">
+			<a href="https://www.google.com/">
+				<img src="img.jpg" alt="Sample Image" width="300" height="200">
+			</a>
+			<div class="desc">
+				You can win this. Play now!
+			</div>
+		</div>
+		<div class="img">
+			<a href="https://www.google.com/">
+				<img src="img.jpg" alt="Sample Image" width="300" height="200">
+			</a>
+			<div class="desc">
+				You can win this. Play now!
+			</div>
+		</div>
+		<div class="img">
+			<a href="https://www.google.com/">
+				<img src="img.jpg" alt="Sample Image" width="300" height="200">
+			</a>
+			<div class="desc">
+				You can win this. Play now!
+			</div>
+		</div>
+		<div class="img">
+			<a href="https://www.google.com/">
+				<img src="img.jpg" alt="Sample Image" width="300" height="200">
+			</a>
+			<div class="desc">
+				You can win this. Play now!
+			</div>
+		</div>
+		<div class="img">
+			<a href="https://www.google.com/">
+				<img src="img.jpg" alt="Sample Image" width="300" height="200">
+			</a>
+			<div class="desc">
+				You can win this. Play now!
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
