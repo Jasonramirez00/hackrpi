@@ -24,10 +24,10 @@
             <a class="navbar-brand" href="#">Play4Prizes</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#home">Home</a></li>
-            <li><a href="#game">Games</a></li>
-            <li><a href="#prize">Prizes</a></li> 
-            <li><a href="#about">About</a></li> 
+            <li><a href="home.html">Home</a></li>
+            <li class="active"><a href="game.html">Games</a></li>
+            <li><a href="prize.html">Prizes</a></li> 
+            <li><a href="about.html">About</a></li> 
           </ul>
         </div>
       </nav>
@@ -39,7 +39,7 @@
   			</div>
           </div>
           <div class="col-sm-2">
-            <img src="http://placehold.it/180x500">
+            <img src="http://placehold.it/180x450">
             </div>
           </div>
         </div>
@@ -76,7 +76,7 @@
 	
 	function drawPlayer() {
 	    ctx.beginPath();
-        ctx.fillStyle = "#ffa500";
+        ctx.fillStyle = "#0095DD";
 	    ctx.fillRect(playerX, playerY, playerWidth, playerHeight);
 	    ctx.closePath();
 	}
@@ -140,8 +140,7 @@
             if (level === 2){
                 charPos = [30, 105];
             } else {
-                playerX = 10;
-                playerY = 10;
+                charPos = [25, 25];
             }
         }
     }
@@ -161,82 +160,17 @@
 	}
 	
 	function draw() {
-        var t = Date.now() / 1000;
 	    ctx.clearRect(0, 0, canvas.width, canvas.height);
 		drawPlayer();
         moveAllow = [true, true, true, true];
         if (level == 0) {
             //wall(150, 99, 24, 225);
-            wall(75, 150, 25, 300);
-            wall(200, 0, 25, 300);
-            wall(300, 150, 25, 300);
+            killWall(75, 150, 25, 300);
+            killWall(200, 0, 25, 300);
+            killWall(300, 150, 25, 300);
             killWall(400, 0, 25, 300);
             killWall(525, 150, 25, 300);
-
             goal(canvas.width - 50, 0, 50, 50);
-            
-            // Border
-            wall(0, 0, 5, canvas.height);
-            wall(0, 0, canvas.width, 5);
-            wall(canvas.width - 5, 0, 5, canvas.height);
-            wall(0, canvas.height - 5, canvas.width, 5);
-        }
-        else if (level == 1) {
-            //       x                                y    w   h
-            killWall(Math.sin(t*2 + 2.5) * 50 + 50,  50, 25, 25);
-            killWall(Math.sin(t*2 + 2) * 50 + 50,    75, 25, 25);
-            killWall(Math.sin(t*2 + 1.5) * 50 + 50, 100, 25, 25);
-            killWall(Math.sin(t*2 + 1) * 50 + 50,   125, 25, 25);
-            killWall(Math.sin(t*2 + 0.5) * 50 + 50, 150, 25, 25);
-            killWall(Math.sin(t*2 + 0) * 50 + 50,   175, 25, 25);
-            killWall(Math.sin(t*2 - 0.5) * 50 + 50, 200, 25, 25);
-            killWall(Math.sin(t*2 - 1) * 50 + 50,   225, 25, 25);
-            killWall(Math.sin(t*2 - 1.5) * 50 + 50, 250, 25, 25);
-            killWall(Math.sin(t*2 - 2) * 50 + 50,   275, 25, 25);
-            killWall(Math.sin(t*2 - 2.5) * 50 + 50, 300, 25, 25);
-
-            killWall(Math.sin(t*2 - 2.5) * 50 + 190,  50, 25, 25);
-            killWall(Math.sin(t*2 - 2) * 50 + 190,    75, 25, 25);
-            killWall(Math.sin(t*2 - 1.5) * 50 + 190, 100, 25, 25);
-            killWall(Math.sin(t*2 - 1) * 50 + 190,   125, 25, 25);
-            killWall(Math.sin(t*2 - 0.5) * 50 + 190, 150, 25, 25);
-            killWall(Math.sin(t*2 - 0) * 50 + 190,   175, 25, 25);
-            killWall(Math.sin(t*2 + 0.5) * 50 + 190, 200, 25, 25);
-            killWall(Math.sin(t*2 + 1) * 50 + 190,   225, 25, 25);
-            killWall(Math.sin(t*2 + 1.5) * 50 + 190, 250, 25, 25);
-            killWall(Math.sin(t*2 + 2) * 50 + 190,   275, 25, 25);
-            killWall(Math.sin(t*2 + 2.5) * 50 + 190, 300, 25, 25);
-            
-            killWall(Math.sin(t*2 + Math.PI / 2) * 175 + 448, Math.cos(t*2 + Math.PI / 2) * 175 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2 + Math.PI / 2) * 130 + 448,   Math.cos(t*2 + Math.PI / 2) * 130 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2 + Math.PI / 2) * 90 + 448, Math.cos(t*2 + Math.PI / 2) * 90 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2 + Math.PI / 2) * 55 + 448,   Math.cos(t*2 + Math.PI / 2) * 55 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2 + Math.PI / 2) * 25 + 448,   Math.cos(t*2 + Math.PI / 2) * 25 + canvas.height / 2, 25, 25);
-            
-            killWall(Math.sin(t*2 + Math.PI) * 175 + 448, Math.cos(t*2 + Math.PI) * 175 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2 + Math.PI) * 130 + 448,   Math.cos(t*2 + Math.PI) * 130 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2 + Math.PI) * 90 + 448, Math.cos(t*2 + Math.PI) * 90 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2 + Math.PI) * 55 + 448,   Math.cos(t*2 + Math.PI) * 55 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2 + Math.PI) * 25 + 448,   Math.cos(t*2 + Math.PI) * 25 + canvas.height / 2, 25, 25);
-            
-            killWall(Math.sin(t*2 - Math.PI / 2) * 175 + 448, Math.cos(t*2 - Math.PI / 2) * 175 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2 - Math.PI / 2) * 130 + 448,   Math.cos(t*2 - Math.PI / 2) * 130 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2 - Math.PI / 2) * 90 + 448, Math.cos(t*2 - Math.PI / 2) * 90 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2 - Math.PI / 2) * 55 + 448,   Math.cos(t*2 - Math.PI / 2) * 55 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2 - Math.PI / 2) * 25 + 448,   Math.cos(t*2 - Math.PI / 2) * 25 + canvas.height / 2, 25, 25);
-            
-            killWall(Math.sin(t*2) * 175 + 448, Math.cos(t*2) * 175 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2) * 130 + 448,   Math.cos(t*2) * 130 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2) * 90 + 448, Math.cos(t*2) * 90 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2) * 55 + 448,   Math.cos(t*2) * 55 + canvas.height / 2, 25, 25);
-            killWall(Math.sin(t*2) * 25 + 448,   Math.cos(t*2) * 25 + canvas.height / 2, 25, 25);
-            
-            wall(448, canvas.height / 2, 25, 25);
-            
-            wall(125, 0, 15, canvas.height - 45);
-            wall(265, 45, 15, canvas.height);
-
-            goal(canvas.width - 60, canvas.height - 60, 50, 50);
             
             // Border
             wall(0, 0, 5, canvas.height);
@@ -302,8 +236,6 @@
 		}
 	}
     draw();
-    
-</script>
     
 </script>
       </body>
