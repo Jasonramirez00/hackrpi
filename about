@@ -34,11 +34,12 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-10">
-            <p>Welcome to the Play4Prizes! Here, there are a variety of games for you to play, explore, and most importantly, have fun. Down below include descriptions for each game. Now, let's play games, earn points, get prizes.
+            <p>Welcome to Play4Prizes! Here, there are a variety of games for you to play, explore, and most importantly, have fun. Down below include descriptions for each game. Now, let's play games, earn points, and get prizes.
 </p>
 
-<h1>Game 1</h1>
-<p>In this game, a blue block travels until it hits a barrier or a red block. Goal is to try to avoid crashing and keep alive as long as possible to gain points.</p>
+<h1>Block Maze</h1>
+<p>In this game, a blue block travels through a maze. The goal of the game is to try to avoid crashing into the red walls and reach the green block at the end of the maze to win, gain points, and advance to the next level.</p>
+
 </article>
           </div>
           <div class="col-sm-2">
