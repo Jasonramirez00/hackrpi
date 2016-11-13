@@ -1,113 +1,65 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<style>
-		div.banner img{
-			width: 75%;
-			margin: 0 10% 0 14%;
-			height: auto;
-		}
-		div.imgrp {
-			width: 75%;
-			margin: 0 10% 0 14%;
-		}
-		div.img {
-			margin: 5px;
-			border: 1px solid #ccc;
-			width: 200px;
-			display: inline-block;
-		}
-		div.img img {
-			width: 100%;
-			height: auto;
-		}
-		div.desc {
-			padding: 10px;
-			text-align: center;
-		}
-		* {
-			margin: 0;
-			padding: 0;
-		}
-		div.nav {
-			list-style-type: none;
-			overflow: hidden;
-			background-color: #333;
-			width: 74.3%;
-			margin: 0 10% 0 14%;
-		}
-		li {
-			float: left;
-			list-style-type: none;
-		}
-		li a {
-			display: block;
-			color: white;
-			text-align: center;
-			padding: 14px 16px;
-			text-decoration: none;
-		}
-	</style>
-</head>
-<body>
-	<div class="banner"><img src="people.jpg" alt="banner image"></div>
-	<div class=nav>
-		<ul>
-			<li><a href="#home">Home</a></li>
-			<li><a href="#game">Games</a></li>
-			<li><a href="#prize">Prizes</a></li>
-			<li><a href="#about">About</a></li>
-		</ul>
-	</div>
-	<div class="imgrp">
-		<div class="img">
-			<a href="https://www.google.com/">
-				<img src="img.jpg" alt="Sample Image" width="300" height="200">
-			</a>
-			<div class="desc">
-				You can win this. Play now!
-			</div>
-		</div>
-		<div class="img">
-			<a href="https://www.google.com/">
-				<img src="img.jpg" alt="Sample Image" width="300" height="200">
-			</a>
-			<div class="desc">
-				You can win this. Play now!
-			</div>
-		</div>
-		<div class="img">
-			<a href="https://www.google.com/">
-				<img src="img.jpg" alt="Sample Image" width="300" height="200">
-			</a>
-			<div class="desc">
-				You can win this. Play now!
-			</div>
-		</div>
-		<div class="img">
-			<a href="https://www.google.com/">
-				<img src="img.jpg" alt="Sample Image" width="300" height="200">
-			</a>
-			<div class="desc">
-				You can win this. Play now!
-			</div>
-		</div>
-		<div class="img">
-			<a href="https://www.google.com/">
-				<img src="img.jpg" alt="Sample Image" width="300" height="200">
-			</a>
-			<div class="desc">
-				You can win this. Play now!
-			</div>
-		</div>
-		<div class="img">
-			<a href="https://www.google.com/">
-				<img src="img.jpg" alt="Sample Image" width="300" height="200">
-			</a>
-			<div class="desc">
-				You can win this. Play now!
-			</div>
-		</div>
-	</div>
-</div>
-</body>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Play4Prizes</title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css.css">
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    </head>
+    <body>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Play4Prizes</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="game.html">Games</a></li>
+            <li class="active"><a href="prize.html">Prizes</a></li> 
+            <li><a href="about.html">About</a></li> 
+          </ul>
+        </div>
+      </nav>
+      <div class="container-fluid">
+        <div class="row gameList">
+        <div class="col-sm-10">
+          <div class="col-sm-3">
+          <img src="http://placehold.it/200x100">
+          </div>
+          <div class="col-sm-3">
+          <img src="http://placehold.it/200x100">
+          </div>
+          <div class="col-sm-3">
+          <img src="http://placehold.it/200x100">
+          </div>
+          <div class="col-sm-3">
+          <img src="http://placehold.it/200x100">
+          </div>
+          </div>
+          <div class="col-sm-2">
+           <img src="http://placehold.it/180x450"></div>
+          </div>
+        </div>
+        <footer class="footer">
+          <div class="container">
+            <p class="text-muted">Footer will go here...</p>
+          </div>
+        </footer>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+      </body>
 </html>
