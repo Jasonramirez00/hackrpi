@@ -9,7 +9,7 @@
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" type="text/css" href="/css/main.css">
+  <link rel="stylesheet" href="css.css">
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -17,40 +17,28 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
     </head>
-    <body>
+    <body onload="startTime()">
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
             <a class="navbar-brand" href="#">Play4Prizes</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active">
-             <a href="index.html">Home</a></li>
-            <li><a href="games.html">Games</a></li>
+            <li class="active"><a href="index.html">Home</a></li>
+            <li><a href="game.html">Games</a></li>
             <li><a href="prize.html">Prizes</a></li> 
+            <li><a href="about.html">About</a></li> 
+            <li class="navbar-text navbar-right"><div id="time"></div></li>
           </ul>
         </div>
       </nav>
       <div class="container-fluid">
         <div class="row">
           <div class="col-sm-10">
-            <p>Welcome to Play4Prizes! Here, there are a variety of games for you to play, explore, and most importantly, have fun. Down below include descriptions for each game. Now, let's play games, earn points, and get prizes.
-</p>
-<h1>Block Maze</h1>
-<p>In this game, a blue block travels through a maze. The goal of the game is to try to avoid crashing into the red walls and reach the green block at the end of the maze to win, gain points, and advance to the next level.</p>
-            
-          </div>
-          <div class="col-sm-2">
-           <img src="http://placehold.it/180x450"></div>
-          </div>
-        </div>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-sm-10">
             <h2>What we're about...</h2>
           </div>
           <div class="col-sm-2">
-            <img src="http://placehold.it/180x450"></div>
+            <img src="ad.png"></div>
           </div>
         </div>
         <footer class="footer">
@@ -63,5 +51,24 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <!-- Include all compiled plugins (below), or include individual files as needed -->
         <script src="js/bootstrap.min.js"></script>
+
+        <script>
+          function startTime()
+          {
+            var today = new Date();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            document.getElementById('time').innerHTML = 
+            h + ":" + m + ":" + s;
+            var t = setTimeout(startTime, 500);
+          }
+          function checkTime(i) {
+            if (i < 10) {i = "0" + i};
+            return i;
+          }
+        </script>
       </body>
 </html>
