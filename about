@@ -1,62 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<style>
-div.container {
-    width: 100%;
-    border: 1px solid grey;
-}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Play4Prizes</title>
 
-header, footer {
-    padding: 1em;
-    color: white;
-    background-color: black;
-    clear: left;
-    text-align: center;
-}
-
-nav {
-    float: left;
-    max-width: 160px;
-    margin: 0;
-    padding: 1em;
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
-   
-nav ul a {
-    text-decoration: none;
-}
-
-</style>
-</head>
-<body>
-
-<div class="container">
-
-<header>
-   <h1>About</h1>
-</header>
-
-<p>Welcome to the Play4Prizes! Here, there are a variety of games for you to play, explore, and most importantly, have fun. Down below include descriptions for each game. Now, let's play games, earn points, get prizes.
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css.css">
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+    </head>
+    <body>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">Play4Prizes</a>
+          </div>
+          <ul class="nav navbar-nav">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="game.html">Games</a></li>
+            <li><a href="prize.html">Prizes</a></li> 
+            <li class="active"><a href="about.html">About</a></li> 
+          </ul>
+        </div>
+      </nav>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-10">
+            <p>Welcome to the Play4Prizes! Here, there are a variety of games for you to play, explore, and most importantly, have fun. Down below include descriptions for each game. Now, let's play games, earn points, get prizes.
 </p>
 
-<h1>Block Maze</h1>
-<p>In this game, a blue block travels through a maze. The goal of the game is to try to avoid crashing and to remain alive for as long as possible to gain points and advance to the next level.</p>
+<h1>Game 1</h1>
+<p>In this game, a blue block travels until it hits a barrier or a red block. Goal is to try to avoid crashing and keep alive as long as possible to gain points.</p>
+</article>
+          </div>
+          <div class="col-sm-2">
+           <img src="http://placehold.it/180x450"></div>
+          </div>
+        </div>
+        <footer class="footer">
+          <div class="container">
+            <p class="text-muted">Footer will go here...</p>
+          </div>
+        </footer>
 
-
-<footer>Games rock</footer>
-
-</div>
-
-</body>
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+      </body>
 </html>
-
-
-
-
-
-
