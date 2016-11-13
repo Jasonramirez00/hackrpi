@@ -6,6 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
   <title>Play4Prizes</title>
+  
+  <style>
+	<!-- disable scroll -->
+    * { overflow-y: hidden; }
+  </style>
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -27,6 +32,7 @@
             <li><a href="index.html">Home</a></li>
             <li class="active"><a href="game.html">Games</a></li>
             <li><a href="prize.html">Prizes</a></li> 
+            <li><a href="about.html">About</a></li> 
           </ul>
         </div>
       </nav>
@@ -34,19 +40,19 @@
         <div class="row">
           <div class="col-sm-2 gameLevels" style="margin-top: 65px;">
             <div class="col-sm-12">
-              <img src="image/easy.png" alt="easy">
+              <img class="level_selector" data-subject="1" src="image/easy.png" alt="easy">
             </div>
             <div class="col-sm-12">
-              <img src="image/medium.png" alt="medium">
+              <img class="level_selector" data-subject="2" src="image/medium.png" alt="medium">
             </div>
             <div class="col-sm-12">
-              <img src="image/hard.png" alt="hard">
+              <img class="level_selector" data-subject="3" src="image/hard.png" alt="hard">
             </div>
           </div>
           <div class="col-sm-6">
             <h3>Da Best Game in Da World!</h3>
             <div>
-              <canvas id="myCanvas" width="600" height="380" style="margin: 12px 0 0px 0px;"></canvas>
+              <canvas id="myCanvas" width="640" height="380" style="margin: 12px 0 0px 0px;"></canvas>
             </div>
           </div>
           <div class="col-sm-2 profile well text-center">
@@ -71,190 +77,343 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <!-- Include all compiled plugins (below), or include individual files as needed -->
       <script src="js/bootstrap.min.js"></script>
+      <div id="timer" style="
+        font-family: Arial, sans-serif;
+        display: block;
+        width :640px;
+        margin: auto;
+        height: 25px;
+        clear: right;"></div>
+      <canvas id="myCanvas" width="640" height="380" style="clear: left;"></canvas>
+      </div>
       <script>
-       var canvas = document.getElementById("myCanvas");
-       var ctx = canvas.getContext("2d");
-       var ballRadius = 10;
-
-       var playerHeight = 30;
-       var playerWidth = 30;
-       var playerX = 10;
-       var playerY = 10;
-       var moveSpeed = 4;
-
-	// User Input
-	var rightPressed = false;
-	var leftPressed = false;
-  var upPressed = false;
-  var downPressed = false;
-  var moveAllow = [true, true, true, true];
-
-  var level = 0;
-
-
-  function drawPlayer() {
-   ctx.beginPath();
-   ctx.fillStyle = "#0095DD";
-   ctx.fillRect(playerX, playerY, playerWidth, playerHeight);
-   ctx.closePath();
- }
-
- var killWall = function(x,y,w,h){
-  ctx.fillStyle = "#ff0000";
-  ctx.fillRect(x,y,w,h);
-  var rightEdge = playerX + playerWidth;
-  var leftEdge = playerX;
-  var topEdge = playerY;
-  var bottomEdge = playerY + playerHeight;
-
-  if (rightEdge > x && leftEdge < x + w && topEdge < y + h && bottomEdge > y){
-            //if (level === 2){
-            //    charPos = [30, 105];
-            //} else {
-            //    playerX = 0;
-            //    playerY = 0;
-            //}
-            playerX = 10;
-            playerY = 10;
+        var canvas = document.getElementById("myCanvas");
+        var ctx = canvas.getContext("2d");
+        
+        var startTime = new Date().getTime();
+        var time = 0;
+        
+        var ballRadius = 10;
+        var playerHeight = 30;
+        var playerWidth = 30;
+        var playerX = 10;
+        var playerY = 10;
+        var moveSpeed = 4;
+        
+        // User Input
+        var rightPressed = false;
+        var leftPressed = false;
+        var upPressed = false;
+        var downPressed = false;
+        var moveAllow = [true, true, true, true];
+        
+        var level = 1;
+        var timer = 0;
+        
+        
+        function drawPlayer() {
+          ctx.beginPath();
+          ctx.fillStyle = "#ffa500";
+          ctx.fillRect(playerX, playerY, playerWidth, playerHeight);
+          ctx.closePath();
+        }
+      
+      var killWall = function(x,y,w,h){
+        ctx.fillStyle = "#ff0000";
+        ctx.fillRect(x,y,w,h);
+        var rightEdge = playerX + playerWidth;
+        var leftEdge = playerX;
+        var topEdge = playerY;
+        var bottomEdge = playerY + playerHeight;
+        
+        if (rightEdge > x && leftEdge < x + w && topEdge < y + h && bottomEdge > y){
+          playerX = 10;
+          playerY = 10;
+        }
+      }
+      
+      var wall = function(x,y,w,h){
+        ctx.fillStyle = "#0095DD";
+        ctx.fillRect(x,y,w,h);
+        var rightEdge = playerX + playerWidth;
+        var leftEdge = playerX;
+        var topEdge = playerY;
+        var bottomEdge = playerY + playerHeight;
+        
+        if (rightEdge >= x && leftEdge < x && bottomEdge > y + moveSpeed && topEdge < y + h - moveSpeed){
+          moveAllow[3] = false;
+          playerX = x - playerWidth;
+        } if (leftEdge <= x + w && rightEdge > x + w && bottomEdge > y + moveSpeed && topEdge < y + h - moveSpeed){
+          moveAllow[2] = false;
+          playerX = x + w;
+        } if (topEdge <= y + h && bottomEdge > y + h && rightEdge > x + moveSpeed && leftEdge < x + w - moveSpeed){
+          moveAllow[0] = false;
+          playerY = y + h;
+        } if (bottomEdge >= y && topEdge < y && rightEdge > x + moveSpeed && leftEdge < x + w - moveSpeed){
+          moveAllow[1] = false;
+          playerY = y - playerHeight;
+        }
+      }
+      
+      var goal = function(x,y,w,h){
+        ctx.fillStyle = "#00ff00";
+        ctx.fillRect(x,y,w,h);
+        var rightEdge = playerX + playerWidth;
+        var leftEdge = playerX;
+        var topEdge = playerY;
+        var bottomEdge = playerY + playerHeight;
+        if (rightEdge > x && leftEdge < x + w && topEdge < y + h && bottomEdge > y){
+          if (level === 'menu'){
+            level = 1;
+          } else {
+            level++;
           }
-        } 
-
-        var wall = function(x,y,w,h){
-          ctx.fillStyle = "#0095DD";
-          ctx.fillRect(x,y,w,h);
-          var rightEdge = playerX + playerWidth;
-          var leftEdge = playerX;
-          var topEdge = playerY;
-          var bottomEdge = playerY + playerHeight;
-
-          if (rightEdge >= x && leftEdge < x && bottomEdge > y + moveSpeed && topEdge < y + h - moveSpeed){
-            moveAllow[3] = false;
-            playerX = x - playerWidth;
-          } if (leftEdge <= x + w && rightEdge > x + w && bottomEdge > y + moveSpeed && topEdge < y + h - moveSpeed){
-            moveAllow[2] = false;
-            playerX = x + w;
-          } if (topEdge <= y + h && bottomEdge > y + h && rightEdge > x + moveSpeed && leftEdge < x + w - moveSpeed){
-            moveAllow[0] = false;
-            playerY = y + h;
-          } if (bottomEdge >= y && topEdge < y && rightEdge > x + moveSpeed && leftEdge < x + w - moveSpeed){
-            moveAllow[1] = false;
-            playerY = y - playerHeight;
+          
+          playerX = 10;
+          playerY = 10;
+        }
+      }
+      
+      function collisionDetection() {
+        for(c=0; c < brickColumnCount; c++) {
+          for(r=0; r < brickRowCount; r++) {
+            var b = bricks[c][r];
+            if(b.status == 1) {
+              if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
+                dy = -dy;
+                b.status = 0;
+              }
+            }
           }
         }
-
-        var goal = function(x,y,w,h){
-          ctx.fillStyle = "#00ff00";
-          ctx.fillRect(x,y,w,h);
-          var rightEdge = playerX + playerWidth;
-          var leftEdge = playerX;
-          var topEdge = playerY;
-          var bottomEdge = playerY + playerHeight;
-          if (rightEdge > x && leftEdge < x + w && topEdge < y + h && bottomEdge > y){
-            if (level === 'menu'){
-              level = 0;
-            } else {
-              level += 1;
-            }
-            if (level === 2){
-              charPos = [30, 105];
-            } else {
-              charPos = [25, 25];
-            }
-          }
+      }
+      
+      function draw() {
+        var t = Date.now() / 1000;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawPlayer();
+        moveAllow = [true, true, true, true];
+        /*--- LEVEL 1 ------------------------------------------------ */
+        if (level == 1) {
+          
+          killWall(125,  Math.sin(t*2 + 2.5) * 50 + 125, 24, 24);
+          killWall(300,  Math.sin(t*2 + 2.5) * 50 + 25, 24, 24);
+          killWall(475,  Math.sin(t*2 + 2.5) * 50 + 225, 24, 24);
+          
+          
+          //wall(150, 99, 24, 225);
+          wall(125, 150, 24, 300);
+          wall(125, 0, 24, 100);
+          wall(300, 50, 24, 350);
+          wall(475, 250, 24, 150);
+          wall(475, 0, 24, 200);
+          
+          goal(canvas.width - 50, 0, 50, 50);
+          
+          // Border
+          wall(0, 0, 5, canvas.height);
+          wall(0, 0, canvas.width, 5);
+          wall(canvas.width - 5, 0, 5, canvas.height);
+          wall(0, canvas.height - 5, canvas.width, 5);
         }
-
-        function collisionDetection() {
-         for(c=0; c < brickColumnCount; c++) {
-           for(r=0; r < brickRowCount; r++) {
-             var b = bricks[c][r];
-             if(b.status == 1) {
-               if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
-                 dy = -dy;
-                 b.status = 0;
-               }
-             }
-           }
-         }
-       }
-
-       function draw() {
-         ctx.clearRect(0, 0, canvas.width, canvas.height);
-         drawPlayer();
-         moveAllow = [true, true, true, true];
-         if (level == 0) {
-            //wall(150, 99, 24, 225);
-            killWall(75, 150, 25, 300);
-            killWall(200, 0, 25, 300);
-            killWall(300, 150, 25, 300);
-            killWall(400, 0, 25, 300);
-            killWall(525, 150, 25, 300);
-            goal(canvas.width - 50, 0, 50, 50);
-            
-            // Border
-            wall(0, 0, 5, canvas.height);
-            wall(0, 0, canvas.width, 5);
-            wall(canvas.width - 5, 0, 5, canvas.height);
-            wall(0, canvas.height - 5, canvas.width, 5);
-          }
-
-
-          if(upPressed && playerY > 0 && moveAllow[0]) {
-            playerY -= moveSpeed;
-            if (playerY < 0) playerY = 0;
-          }
-          else if(downPressed && playerY < canvas.height - playerHeight && moveAllow[1]) {
-            playerY += moveSpeed;
-            if (playerY > canvas.height - playerHeight) playerY = canvas.height - playerHeight;
-          }
-          if(leftPressed && playerX > 0 && moveAllow[2]) {
-            playerX -= moveSpeed;
-            if (playerX < 0) playerX = 0;
-          }
-          else if(rightPressed && playerX < canvas.width - playerWidth && moveAllow[3]) {
-           playerX += moveSpeed;
-           if (playerX > canvas.width - playerWidth) playerX = canvas.width - playerWidth;
-         }
-
-
-
-
-         requestAnimationFrame(draw);
-
-       }
-
-       document.addEventListener("keydown", keyDownHandler, false);
-       document.addEventListener("keyup", keyUpHandler, false);
-       function keyDownHandler(e) {
-         if(e.keyCode == 39) {
-           rightPressed = true;
-         }
-         else if(e.keyCode == 37) {
-           leftPressed = true;
-         }
-         else if (e.keyCode == 38) {
+        /*--- LEVEL 2 ------------------------------------------------ */
+        else if (level == 2) {
+          //       x                                y    w   h
+          killWall(Math.sin(t*2 + 2.5) * 50 + 50,  50, 25, 25);
+          killWall(Math.sin(t*2 + 2) * 50 + 50,    75, 25, 25);
+          killWall(Math.sin(t*2 + 1.5) * 50 + 50, 100, 25, 25);
+          killWall(Math.sin(t*2 + 1) * 50 + 50,   125, 25, 25);
+          killWall(Math.sin(t*2 + 0.5) * 50 + 50, 150, 25, 25);
+          killWall(Math.sin(t*2 + 0) * 50 + 50,   175, 25, 25);
+          killWall(Math.sin(t*2 - 0.5) * 50 + 50, 200, 25, 25);
+          killWall(Math.sin(t*2 - 1) * 50 + 50,   225, 25, 25);
+          killWall(Math.sin(t*2 - 1.5) * 50 + 50, 250, 25, 25);
+          killWall(Math.sin(t*2 - 2) * 50 + 50,   275, 25, 25);
+          killWall(Math.sin(t*2 - 2.5) * 50 + 50, 300, 25, 25);
+          
+          killWall(Math.sin(t*2 - 2.5) * 50 + 190,  50, 25, 25);
+          killWall(Math.sin(t*2 - 2) * 50 + 190,    75, 25, 25);
+          killWall(Math.sin(t*2 - 1.5) * 50 + 190, 100, 25, 25);
+          killWall(Math.sin(t*2 - 1) * 50 + 190,   125, 25, 25);
+          killWall(Math.sin(t*2 - 0.5) * 50 + 190, 150, 25, 25);
+          killWall(Math.sin(t*2 - 0) * 50 + 190,   175, 25, 25);
+          killWall(Math.sin(t*2 + 0.5) * 50 + 190, 200, 25, 25);
+          killWall(Math.sin(t*2 + 1) * 50 + 190,   225, 25, 25);
+          killWall(Math.sin(t*2 + 1.5) * 50 + 190, 250, 25, 25);
+          killWall(Math.sin(t*2 + 2) * 50 + 190,   275, 25, 25);
+          killWall(Math.sin(t*2 + 2.5) * 50 + 190, 300, 25, 25);
+          
+          killWall(Math.sin(t*2 + Math.PI / 2) * 175 + 448, Math.cos(t*2 + Math.PI / 2) * 175 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2 + Math.PI / 2) * 130 + 448,   Math.cos(t*2 + Math.PI / 2) * 130 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2 + Math.PI / 2) * 90 + 448, Math.cos(t*2 + Math.PI / 2) * 90 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2 + Math.PI / 2) * 55 + 448,   Math.cos(t*2 + Math.PI / 2) * 55 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2 + Math.PI / 2) * 25 + 448,   Math.cos(t*2 + Math.PI / 2) * 25 + canvas.height / 2, 25, 25);
+          
+          killWall(Math.sin(t*2 + Math.PI) * 175 + 448, Math.cos(t*2 + Math.PI) * 175 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2 + Math.PI) * 130 + 448,   Math.cos(t*2 + Math.PI) * 130 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2 + Math.PI) * 90 + 448, Math.cos(t*2 + Math.PI) * 90 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2 + Math.PI) * 55 + 448,   Math.cos(t*2 + Math.PI) * 55 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2 + Math.PI) * 25 + 448,   Math.cos(t*2 + Math.PI) * 25 + canvas.height / 2, 25, 25);
+          
+          killWall(Math.sin(t*2 - Math.PI / 2) * 175 + 448, Math.cos(t*2 - Math.PI / 2) * 175 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2 - Math.PI / 2) * 130 + 448,   Math.cos(t*2 - Math.PI / 2) * 130 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2 - Math.PI / 2) * 90 + 448, Math.cos(t*2 - Math.PI / 2) * 90 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2 - Math.PI / 2) * 55 + 448,   Math.cos(t*2 - Math.PI / 2) * 55 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2 - Math.PI / 2) * 25 + 448,   Math.cos(t*2 - Math.PI / 2) * 25 + canvas.height / 2, 25, 25);
+          
+          killWall(Math.sin(t*2) * 175 + 448, Math.cos(t*2) * 175 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2) * 130 + 448,   Math.cos(t*2) * 130 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2) * 90 + 448, Math.cos(t*2) * 90 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2) * 55 + 448,   Math.cos(t*2) * 55 + canvas.height / 2, 25, 25);
+          killWall(Math.sin(t*2) * 25 + 448,   Math.cos(t*2) * 25 + canvas.height / 2, 25, 25);
+          
+          wall(448, canvas.height / 2, 25, 25);
+          
+          wall(125, 0, 15, canvas.height - 45);
+          wall(265, 45, 15, canvas.height);
+          
+          goal(canvas.width - 60, canvas.height - 60, 50, 50);
+          
+          // Border
+          wall(0, 0, 5, canvas.height);
+          wall(0, 0, canvas.width, 5);
+          wall(canvas.width - 5, 0, 5, canvas.height);
+          wall(0, canvas.height - 5, canvas.width, 5);
+        }
+        /*--- LEVEL 3 ------------------------------------------------ */
+        else if (level == 3) {
+          killWall(Math.sin(t*2) * (canvas.width / 2 - 12) + canvas.width / 2 - 12,  50, 24, 24);
+          killWall(Math.sin(t*2) * (canvas.width / 2 - 12) + canvas.width / 2 - 12,  150, 24, 24);
+          killWall(Math.sin(t*2) * (canvas.width / 2 - 12) + canvas.width / 2 - 12,  250, 24, 24);
+          killWall(Math.sin(t*2) * (canvas.width / 2 - 12) + canvas.width / 2 - 12,  350, 24, 24);
+          killWall(Math.sin(t*2) * (canvas.width / 2 - 12) + canvas.width / 2 - 12,  450, 24, 24);
+          killWall(Math.sin(t*2) * (canvas.width / 2 - 12) + canvas.width / 2 - 12,  550, 24, 24);
+          
+          killWall(60,  Math.sin(t*2) * (canvas.height / 2 - 12) + canvas.height / 2 - 12, 24, 24);
+          killWall(160,  Math.sin(t*2) * (canvas.height / 2 - 12) + canvas.height / 2 - 12, 24, 24);
+          killWall(260,  Math.sin(t*2) * (canvas.height / 2 - 12) + canvas.height / 2 - 12, 24, 24);
+          killWall(360,  Math.sin(t*2) * (canvas.height / 2 - 12) + canvas.height / 2 - 12, 24, 24);
+          killWall(460,  Math.sin(t*2) * (canvas.height / 2 - 12) + canvas.height / 2 - 12, 24, 24);
+          killWall(560,  Math.sin(t*2) * (canvas.height / 2 - 12) + canvas.height / 2 - 12, 24, 24);
+          
+          // Lower wall
+          wall(60, canvas.height - 55, 138, 10);
+          wall(198, canvas.height - 75, 50, 10);
+          wall(248, canvas.height - 55, 151, 10);
+          wall(399, canvas.height - 75, 50, 10);
+          wall(449, canvas.height - 55, 138, 10);
+          
+          wall(188, canvas.height - 75, 10, 20);
+          wall(248, canvas.height - 75, 10, 20);
+          wall(389, canvas.height - 75, 10, 20);
+          wall(449, canvas.height - 75, 10, 20);
+          
+          // Left wall
+          wall(50, 0, 10, canvas.height - 45);
+          
+          // Right wall
+          wall(canvas.width - 56, 50, 10, canvas.height - 95);
+          
+          // Top wall
+          wall(110, 45, canvas.width - 156, 10);
+          
+          // Second left wall
+          wall(110, 45, 10, canvas.height - 140);
+          
+          goal(canvas.width - 106, 55, 50, 50);
+          
+          
+          // Border
+          wall(0, 0, 5, canvas.height);
+          wall(0, 0, canvas.width, 5);
+          wall(canvas.width - 5, 0, 5, canvas.height);
+          wall(0, canvas.height - 5, canvas.width, 5);
+        }
+        /*--- LEVEL 4 ------------------------------------------------ */
+        else if (level == 4) {
+          ctx.font = "30px Arial";
+          ctx.fillText("Pretty Good.",canvas.width / 2, canvas.height / 2);
+          
+          // Border
+          wall(0, 0, 5, canvas.height);
+          wall(0, 0, canvas.width, 5);
+          wall(canvas.width - 5, 0, 5, canvas.height);
+          wall(0, canvas.height - 5, canvas.width, 5);
+        }
+        
+        if(upPressed && playerY > 0 && moveAllow[0]) {
+          playerY -= moveSpeed;
+          if (playerY < 0) playerY = 0;
+        }
+        else if(downPressed && playerY < canvas.height - playerHeight && moveAllow[1]) {
+          playerY += moveSpeed;
+          if (playerY > canvas.height - playerHeight) playerY = canvas.height - playerHeight;
+        }
+        if(leftPressed && playerX > 0 && moveAllow[2]) {
+          playerX -= moveSpeed;
+          if (playerX < 0) playerX = 0;
+        }
+        else if(rightPressed && playerX < canvas.width - playerWidth && moveAllow[3]) {
+          playerX += moveSpeed;
+          if (playerX > canvas.width - playerWidth) playerX = canvas.width - playerWidth;
+        }
+        
+        time = parseInt((new Date().getTime()-startTime)/1000, 10);
+        var clock = document.getElementById("timer");
+        clock.innerHTML = time + ' seconds';
+        requestAnimationFrame(draw);
+      }
+      
+      document.addEventListener("keydown", keyDownHandler, false);
+      document.addEventListener("keyup", keyUpHandler, false);
+      function keyDownHandler(e) {
+        if(e.keyCode == 39) {
+          rightPressed = true;
+        }
+        else if(e.keyCode == 37) {
+          leftPressed = true;
+        }
+        else if (e.keyCode == 38) {
           upPressed = true;
         }
         else if (e.keyCode == 40) {
           downPressed = true;
         }
       }
-
+      
       function keyUpHandler(e) {
         if(e.keyCode == 39) {
-         rightPressed = false;
-       }
-       else if(e.keyCode == 37) {
-         leftPressed = false;
-       }
-       else if(e.keyCode == 38) {
-         upPressed = false;
-       }
-       else if(e.keyCode == 40) {
-         downPressed = false;
-       }
-     }
-     draw();
-
-   </script>
+          rightPressed = false;
+        }
+        else if(e.keyCode == 37) {
+          leftPressed = false;
+        }
+        else if(e.keyCode == 38) {
+          upPressed = false;
+        }
+        else if(e.keyCode == 40) {
+          downPressed = false;
+        }
+      }
+      
+      function changeLevel(l) {
+        level = l;
+        
+        playerX = 10;
+        playerY = 10;
+      }
+     // Add level changed
+      var images = document.getElementsByClassName('level_selector');
+      for (var i = 0; i < images.length; i++) {
+        images[i].onclick = function(e){
+            changeLevel(this.getAttribute('data-subject'));
+        };
+      }
+      
+      draw();
+      
+      
+      
+      </script>
  </body>
  </html>
